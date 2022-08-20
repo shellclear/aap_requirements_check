@@ -1,0 +1,11 @@
+---
+# handlers file for aap_requirements_check
+- name: Restart chrony service
+  ansible.builtin.service:
+    name: chronyd
+    state: restarted
+
+- name: Restart firewalld service
+  ansible.builtin.service:
+    name: firewalld
+    state: restarted

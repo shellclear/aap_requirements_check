@@ -1,0 +1,10 @@
+---
+# vars file for aap_requirements_check
+common_packets:
+  - chrony
+  - firewalld
+  
+common_services:
+  - chronyd
+  - firewalld
+ 

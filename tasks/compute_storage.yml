@@ -1,0 +1,117 @@
+---
+# tasks file for aap_requirements_check
+- name: Check database host group 
+  when: 
+    - '"database" in group_names'
+    - inventory_hostname in groups['database']
+  block:
+    - name: Ensure that system memory size is correct on the database group
+      assert:
+        that: 
+          - ansible_memtotal_mb >= memory
+        msg: The system memory is insufficient, {{ inventory_hostname }} memory is equals to {{ ansible_memtotal_mb }} and should be equals to {{ memory }} 
+
+    - name: Ensure that cpu number size is correct on the database group
+      assert:
+        that:
+          - ansible_processor_vcpus >= cpu
+        msg: The system cpu is insufficient, {{ inventory_hostname }} cpu number is equal to {{ ansible_processor_vcpus }} and it should be equals to {{ cpu }}
+
+    - name: Ensure that that volumes size is correct on the database group
+      vars:
+        root_filesystem: "{{ ansible_mounts | selectattr('mount','equalto', database_volumes['mountpoint']) | list | first }}"
+        root_filesystem_total_size_GiB: "{{ ( root_filesystem['size_total'] / 1024 | pow(3) ) | round | int }}"
+      assert:
+        that:
+          - root_filesystem_total_size_GiB | int >= database_volumes['size'] | int
+        msg: "{{ inventory_hostname }} has a {{ database_volumes['mountpoint'] }} filesystem size of {{ root_filesystem_total_size_GiB }}GiB but it should be equals to {{ database_volumes['size'] }}GiB" 
+      loop: "{{ volumes }}"
+      loop_control:
+        loop_var: database_volumes
+
+- name: Check automationcontroller host group
+  when: 
+    - '"automationcontroller" in group_names'
+    - inventory_hostname in groups['automationcontroller']
+  block:
+    - name: Ensure that system memory size is correct on the automationcontroller group
+      assert:
+        that: 
+          - ansible_memtotal_mb >= memory
+        msg: The system memory is insufficient, {{ inventory_hostname }} memory is equals to {{ ansible_memtotal_mb }} and should be equals to {{ memory }}
+
+    - name: Ensure that cpu number size is correct on the automationcontroller group
+      assert:
+        that:
+          - ansible_processor_vcpus >= cpu
+        msg: The system cpu is insufficient, {{ inventory_hostname }} cpu number is equal to {{ ansible_processor_vcpus }} and it should be equals to {{ cpu }}
+
+    - name: Ensure that that volumes size is correct on the automationcontroller group
+      vars:
+        root_filesystem: "{{ ansible_mounts | selectattr('mount','equalto', automationcontroller_volumes['mountpoint']) | list | first }}"
+        root_filesystem_total_size_GiB: "{{ ( root_filesystem['size_total'] / 1024 | pow(3) ) | round | int }}"
+      assert:
+        that:
+          - root_filesystem_total_size_GiB | int >= automationcontroller_volumes['size'] | int
+        msg: "{{ inventory_hostname }} has a {{ automationcontroller_volumes['mountpoint'] }} filesystem size of {{ root_filesystem_total_size_GiB }}GiB but it should be equals to {{ automationcontroller_volumes['size'] }}GiB"
+      loop: "{{ volumes }}"
+      loop_control:
+        loop_var: automationcontroller_volumes
+
+- name: Check automationhub host group
+  when: 
+    - '"automationhub" in group_names'  
+    - inventory_hostname in groups['automationhub']
+  block:
+    - name: Ensure that system memory size is correct on the automationhub group
+      assert:
+        that: 
+          - ansible_memtotal_mb >= memory
+        msg: The system memory is insufficient, {{ inventory_hostname }} memory is equals to {{ ansible_memtotal_mb }} and should be equals to {{ memory }}
+
+    - name: Ensure that cpu number size is correct on the automationhub group
+      assert:
+        that:
+          - ansible_processor_vcpus >= cpu
+        msg: The system cpu is insufficient, {{ inventory_hostname }} cpu number is equal to {{ ansible_processor_vcpus }} and it should be equals to {{ cpu }}
+
+    - name: Ensure that that volumes size is correct on the automationhub group
+      vars:
+        root_filesystem: "{{ ansible_mounts | selectattr('mount','equalto', automationhub_volumes['mountpoint']) | list | first }}"
+        root_filesystem_total_size_GiB: "{{ ( root_filesystem['size_total'] / 1024 | pow(3) ) | round | int }}"
+      assert:
+        that:
+          - root_filesystem_total_size_GiB | int >= automationhub_volumes['size'] | int
+        msg: "{{ inventory_hostname }} has a {{ automationhub_volumes['mountpoint'] }} filesystem size of {{ root_filesystem_total_size_GiB }}GiB but it should be equals to {{ automationhub_volumes['size'] }}GiB"
+      loop: "{{ volumes }}"
+      loop_control:
+        loop_var: automationhub_volumes
+
+- name: Check execution_nodes host group
+  when: 
+    - '"execution_nodes" in group_names'  
+    - inventory_hostname in groups['execution_nodes']
+  block:
+    - name: Ensure that system memory size is correct on the execution_nodes group
+      assert:
+        that: 
+          - ansible_memtotal_mb >= memory
+        msg: The system memory is insufficient, {{ inventory_hostname }} memory is equals to {{ ansible_memtotal_mb }} and should be equals to {{ memory }}
+
+    - name: Ensure that cpu number size is correct on the execution_nodes group
+      assert:
+        that:
+          - ansible_processor_vcpus >= cpu
+        msg: The system cpu is insufficient, {{ inventory_hostname }} cpu number is equal to {{ ansible_processor_vcpus }} and it should be equals to {{ cpu }}
+
+    - name: Ensure that that volumes size is correct on the execution_nodes group
+      vars:
+        root_filesystem: "{{ ansible_mounts | selectattr('mount','equalto', execution_nodes_volumes['mountpoint']) | list | first }}"
+        root_filesystem_total_size_GiB: "{{ ( root_filesystem['size_total'] / 1024 | pow(3) ) | round | int }}"
+      assert:
+        that:
+          - root_filesystem_total_size_GiB | int >= execution_nodes_volumes['size'] | int
+        msg: "{{ inventory_hostname }} has a {{ execution_nodes_volumes['mountpoint'] }} filesystem size of {{ root_filesystem_total_size_GiB }}GiB but it should be equals to {{ execution_nodes_volumes['size'] }}GiB"
+      loop: "{{ volumes }}"
+      loop_control:
+        loop_var: execution_nodes_volumes

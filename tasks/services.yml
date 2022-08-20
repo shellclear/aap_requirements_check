@@ -1,0 +1,10 @@
+---
+# tasks file for aap_requirements_check
+- name: Ensure basic service(s) are enabled and started
+  ansible.builtin.service:
+    name: "{{ service }}"
+    state: started
+    enabled: true
+  loop: "{{ common_services }}"
+  loop_control:
+    loop_var: service

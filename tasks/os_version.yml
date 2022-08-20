@@ -1,0 +1,8 @@
+---
+# tasks file for aap_requirements_check
+- name: Ensure OS version is RHEL 8.3 or newer
+  assert:
+    that:
+      - ansible_distribution == "RedHat"
+      - ansible_distribution_version | float >= {{ redhat_version }} | float
+    msg: "{{ inventory_hostname }} is running {{ ansible_distribution }} {{ ansible_distribution_version }} but the minimum OS version supported is RedHat {{ redhat_version }} or newer"

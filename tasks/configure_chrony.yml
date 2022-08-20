@@ -1,0 +1,14 @@
+---
+# tasks file for aap_requirements_check
+- name: Configure chrony service
+  ansible.builtin.lineinfile:
+    path: /etc/chrony.conf
+    state: present
+    create: true
+    regex: '^pool '
+    line: pool {{ common_ntp_pool }} iburst
+  notify: restart chrony
+
+- name: Set timezone
+  community.general.timezone:
+    name: "{{ timezone | mandatory }}"

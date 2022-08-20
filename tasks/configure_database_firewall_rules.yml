@@ -1,0 +1,11 @@
+---
+# tasks file for aap_requirements_check
+- name: Configure database firewall rules
+  when:
+    - '"database" in groups'
+    - inventory_hostname in groups['database']
+  ansible.posix.firewalld:
+    port: "{{ pg_port }}/tcp"
+    permanent: yes
+    immediate: true
+    state: enabled

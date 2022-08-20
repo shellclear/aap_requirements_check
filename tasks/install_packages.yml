@@ -1,0 +1,18 @@
+---
+# tasks file for aap_requirements_check
+- name: Ensure the latest package versions are installed
+  ansible.builtin.yum:
+    name: "*"
+    state: latest
+  
+- name: Ensure the basic packages are installed
+  ansible.builtin.yum:
+    name: "{{ common_packets }}"
+    state: present
+
+- name: Ensure the extra packages are installed
+  when: 
+    - extra_packets is defined
+  ansible.builtin.yum:
+    name: "{{ extra_packets }}"
+    state: present 
