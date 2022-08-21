@@ -1,0 +1,18 @@
+---
+# tasks file for aap_requirements_check
+- name: Configure automationhub firewall rules
+  when:
+    - '"automationhub" in groups'
+    - inventory_hostname in groups['automationhub']
+  ansible.posix.firewalld:
+    port: "{{ ports }}/tcp"
+    permanent: yes
+    immediate: true
+    state: enabled
+  loop:
+    - "{{ ansible_port }}"
+    - "{{ nginx_http_port }}"
+    - "{{ nginx_https_port }}"
+  loop_control:
+    loop_var: ports
+    
