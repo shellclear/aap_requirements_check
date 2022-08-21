@@ -35,25 +35,10 @@
     - configure_chrony
   import_tasks: configure_chrony.yml
 
-- name: Import configure_database_firewall_rules.yml file
+- name: Import configure_firewall_rules.yml file
   tags: 
-    - configure_database_firewall_rules
-  import_tasks: configure_database_firewall_rules.yml
-
-- name: Import configure_automationcontroller_firewall_rules.yml file
-  tags: 
-    - configure_automationcontroller_firewall_rules
-  import_tasks: configure_automationcontroller_firewall_rules.yml
-
-- name: Import configure_automationhub_firewall_rules.yml file
-  tags: 
-    - configure_automationhub_firewall_rules
-  import_tasks: configure_automationhub_firewall_rules.yml
-
-- name: Import configure_execution_nodes_firewall_rules.yml file
-  tags: 
-    - configure_execution_nodes_firewall_rules
-  import_tasks: configure_execution_nodes_firewall_rules.yml
+    - configure_firewall_rules
+  import_tasks: configure_firewall_rules.yml
 
 - name: Import check_access_download_collections.yml file
   tags: 

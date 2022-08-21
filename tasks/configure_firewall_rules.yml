@@ -1,0 +1,77 @@
+---
+# tasks file for aap_requirements_check
+- name: Configure database firewall rules
+  when:
+    - '"database" in groups'
+    - inventory_hostname in groups['database']
+  ansible.posix.firewalld:
+    port: "{{ ports }}/tcp"
+    permanent: yes
+    immediate: true
+    state: enabled
+  loop:
+    - "{{ ansible_port }}"
+    - "{{ pg_port }}"
+  loop_control:
+    loop_var: ports
+
+- name: Configure automationcontroller firewall rules
+  when:
+    - '"automationcontroller" in groups'
+    - inventory_hostname in groups['automationcontroller']
+  ansible.posix.firewalld:
+    port: "{{ ports }}/tcp"
+    permanent: yes
+    immediate: true
+    state: enabled
+  loop:
+    - "{{ ansible_port }}"
+    - "{{ nginx_http_port }}"
+    - "{{ nginx_https_port }}"
+  loop_control:
+    loop_var: ports
+
+- name: Configure automationhub firewall rules
+  when:
+    - '"automationhub" in groups'
+    - inventory_hostname in groups['automationhub']
+  ansible.posix.firewalld:
+    port: "{{ ports }}/tcp"
+    permanent: yes
+    immediate: true
+    state: enabled
+  loop:
+    - "{{ ansible_port }}"
+    - "{{ nginx_http_port }}"
+    - "{{ nginx_https_port }}"
+  loop_control:
+    loop_var: ports
+
+- name: Configure execution_nodes firewall rules
+  when:
+    - '"execution_nodes" in groups'
+    - inventory_hostname in groups['execution_nodes']
+  ansible.posix.firewalld:
+    port: "{{ ports }}/tcp"
+    permanent: yes
+    immediate: true
+    state: enabled
+  loop:
+    - "{{ ansible_port }}"
+    - "{{ receptor_listener_port }}"
+  loop_control:
+    loop_var: ports
+
+- name: Configure bastion firewall rules
+  when:
+    - '"bastion" in groups'
+    - inventory_hostname in groups['bastion']
+  ansible.posix.firewalld:
+    port: "{{ ports }}/tcp"
+    permanent: yes
+    immediate: true
+    state: enabled
+  loop:
+    - "{{ ansible_port }}"
+  loop_control:
+    loop_var: ports
