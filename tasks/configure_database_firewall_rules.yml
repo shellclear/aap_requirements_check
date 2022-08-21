@@ -5,7 +5,13 @@
     - '"database" in groups'
     - inventory_hostname in groups['database']
   ansible.posix.firewalld:
-    port: "{{ pg_port }}/tcp"
+    port: "{{ ports }}/tcp"
     permanent: yes
     immediate: true
     state: enabled
+  loop:
+    - "{{ ansible_port }}"
+    - "{{ pg_port }}"
+  loop_control:
+    loop_var: ports
+    
