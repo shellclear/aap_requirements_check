@@ -8,3 +8,24 @@ common_services:
   - chronyd
   - firewalld
  
+common_urls:
+  # automation hub or Galaxy server
+  - https://galaxy.ansible.com
+  - https://cloud.redhat.com
+  - https://console.redhat.com
+  - https://sso.redhat.com
+  # Red Hat Insights for Red Hat Ansible Automation Platform
+  - https://api.access.redhat.com
+  #- https://cert-api.access.redhat.com # commented because <[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed> error
+  - https://cert.cloud.redhat.com
+  - https://cloud.redhat.com 
+  # Automation Hub
+  - https://console.redhat.com
+  - https://sso.redhat.com
+  - https://automation-hub-prd.s3.amazonaws.com
+  - https://galaxy.ansible.com
+  - https://ansible-galaxy.s3.amazonaws.com
+  - https://registry.redhat.io
+  - https://cert.cloud.redhat.com
+  # Execution Environments (EE)
+  - https://registry.redhat.io
