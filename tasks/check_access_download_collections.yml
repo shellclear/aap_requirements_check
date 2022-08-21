@@ -1,0 +1,9 @@
+- name: Check that you can connect (GET) to {{ common_urls }} and it returns a status 200
+  ansible.builtin.uri:
+    url: "{{ url }}"
+    status_code:
+      - 200
+      - 403
+  loop: "{{ common_urls }}"
+  loop_control:
+    loop_var: url
