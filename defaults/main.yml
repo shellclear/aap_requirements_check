@@ -4,4 +4,8 @@ redhat_version: "8.4"
 ansible_username: "ansible"
 ansible_repository: "ansible-automation-platform-2.2-for-rhel-8-x86_64-rpms"
 common_ntp_pool: 2.rhel.pool.ntp.org
+ansible_port: 22
+nginx_http_port: 80
+nginx_https_port: 443
 pg_port: 5432
+receptor_listener_port: 27199
