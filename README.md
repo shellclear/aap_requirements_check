@@ -144,8 +144,9 @@ TAGS Available:
 
 ```command
 playbook: playbook.yml
+
   play #1 (all): Ensure the nodes has the compute, storage and basic configuration requirements TAGS: []
-      TASK TAGS: [ansible_credentials, compute_storage, configure_chrony, configure_database_firewall_rules, install_packages, os_version, services, subscription]
+      TASK TAGS: [ansible_credentials, check_access_download_collections, compute_storage, configure_automationcontroller_firewall_rules, configure_automationhub_firewall_rules, configure_chrony, configure_database_firewall_rules, configure_execution_nodes_firewall_rules, install_packages, os_version, services, subscription]
 ```
 
 [![asciicast](https://asciinema.org/a/516079.svg)](https://asciinema.org/a/516079)
