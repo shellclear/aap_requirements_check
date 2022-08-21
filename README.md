@@ -11,6 +11,9 @@ Limitations
 Requirements
 ------------
 
+Ansible: ansible-core 2.13 or higher
+Python: 3.8 or later 
+
 To use correctly this role you will need to create an inventory file with the structure below and define the target nodes inside the groups according its function:
 
 ```command
