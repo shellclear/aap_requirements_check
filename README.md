@@ -90,6 +90,7 @@ Role Variables
 | nginx_https_port                     | 443                                                     | Specify HTTPS port (controller and hub)                |
 | pg_port                              | 5432                                                    | Specify Postgresql database port                       |
 | receptor_listener_port               | 27199                                                   | Specify MESH port (controller, hop and exec nodes)     |
+| common_urls                          | [] long list of Redhat and Ansible urls                 | Specify url used by the installer                      |
 
 Example Playbook
 ----------------
