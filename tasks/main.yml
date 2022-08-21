@@ -39,3 +39,8 @@
   tags: 
     - configure_database_firewall_rules
   import_tasks: configure_database_firewall_rules.yml
+
+- name: Import check_access_download_collections.yml file
+  tags: 
+    - check_access_download_collections
+  import_tasks: check_access_download_collections.yml
