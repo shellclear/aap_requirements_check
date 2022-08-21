@@ -85,7 +85,11 @@ Role Variables
 | common_services                      | [chrony,firewalld]                                      | Specify the basic services to install                  |
 | common_ntp_pool                      | 2.rhel.pool.ntp.org                                     | Specify a NTP server                                   |
 | timezone                             | MANDATORY                                               | Specify a timezone                                     |
-| pg_port                              | 5432                                                    | Specify postgresql database port to open               | 
+| ansible_port                         | 22                                                      | Specify SSH port                                       |
+| nginx_http_port                      | 80                                                      | Specify HTTP port (controller and hub)                 |
+| nginx_https_port                     | 443                                                     | Specify HTTPS port (controller and hub)                |
+| pg_port                              | 5432                                                    | Specify Postgresql database port                       |
+| receptor_listener_port               | 27199                                                   | Specify MESH port (controller, hop and exec nodes)     |
 
 Example Playbook
 ----------------
