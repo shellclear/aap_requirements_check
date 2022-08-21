@@ -1,0 +1,17 @@
+---
+# tasks file for aap_requirements_check
+- name: Configure execution_nodes firewall rules
+  when:
+    - '"execution_nodes" in groups'
+    - inventory_hostname in groups['execution_nodes']
+  ansible.posix.firewalld:
+    port: "{{ ports }}/tcp"
+    permanent: yes
+    immediate: true
+    state: enabled
+  loop:
+    - "{{ ansible_port }}"
+    - "{{ receptor_listener_port }}"
+  loop_control:
+    loop_var: ports
+    
