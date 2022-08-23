@@ -1,4 +1,0 @@
-- name: Set hostname based on the inventory_hostname special variable
-  ansible.builtin.hostname:
-    name: "{{ inventory_hostname }}"
-    use: systemd
