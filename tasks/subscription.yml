@@ -1,14 +1,14 @@
 ---
 # tasks file for aap_requirements_check
 - name: Register and subscribe hosts.
-  redhat_subscription:
+  community.general.redhat_subscription:
     username: "{{ rhn_username | mandatory }}"
     password: "{{ rhn_password | mandatory }}"
     pool_ids: "{{ pool_ids | default(omit) }}" # Parameter not necessary when using SCA enabled account
     state: present
-    force_register: "{{ rhn_force_register | default(true) }}" 
+    force_register: "{{ rhn_force_register | default(omit) }}"
 
 - name: Enable ansible repository
-  rhsm_repository:
+  community.general.rhsm_repository:
     name: "{{ ansible_repository }}"  
     state: enabled
