@@ -15,6 +15,11 @@
     - ansible_credentials
   import_tasks: ansible_credentials.yml
 
+- name: Import configure_hostname.yml file
+  tags:
+    - configure_hostname
+  import_tasks: configure_hostname.yml
+
 - name: Import subscription.yml file
   tags: 
     - subscription
@@ -44,11 +49,6 @@
   tags: 
     - check_access_download_collections
   import_tasks: check_access_download_collections.yml
-
-- name: Import configure_hostname.yml file
-  tags:
-    - configure_hostname
-  import_tasks: configure_hostname.yml
 
 - name: Import generate_hosts_file.yml file
   tags:
